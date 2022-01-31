@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserFormComponent } from './user-form/user-form.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    UserProfileComponent,
+    UserFormComponent,
   ],
   imports: [
     BrowserModule,

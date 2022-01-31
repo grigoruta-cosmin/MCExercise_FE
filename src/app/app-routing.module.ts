@@ -3,11 +3,14 @@ import { Routes, RouterModule, Router } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AlwaysAuthGuard } from './_guards/AlwaysAuthGuard'
 
 const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
-  {path: '**', component: HomeComponent}
+  {path: 'profile', component: UserProfileComponent, canActivate: [AlwaysAuthGuard]},
+  {path: 'home', component: HomeComponent, canActivate: [AlwaysAuthGuard]}
 ];
 
 @NgModule({
