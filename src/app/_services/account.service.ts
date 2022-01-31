@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
-import { map } from 'rxjs/operators'
+import { map, switchAll } from 'rxjs/operators'
 import { User } from '../_models/User';
+import { UserDTO } from '../_models/UserDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class AccountService {
   baseUrl = 'https://localhost:7076/api/'
   private currentUserSource = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
   currentUser$ = this.currentUserSource.asObservable();
+  currentUserData: UserDTO;
 
   constructor(private http: HttpClient) { }
 
@@ -26,6 +28,17 @@ export class AccountService {
     );
   }
 
+  update(model: any) {
+    return this.currentUser$.pipe(map((user: User) => {
+      model['id'] = user.id;
+      return this.http.put(this.baseUrl + 'users/update', model, {
+        headers: {
+          Authorization: `Bearer ${user.token}`
+        }
+      });
+    }), switchAll());
+  }
+
   login(model: any) {
     return this.http.post(this.baseUrl + 'users/authenticate', model).pipe(
       map((response: User) => {
@@ -39,6 +52,15 @@ export class AccountService {
     )
   }
 
+  getCurrentUserData() {
+    return this.currentUser$.pipe(map((user: User) => {
+      return this.http.get(this.baseUrl + 'users/' + user.id, {
+        headers: {
+          Authorization: `Bearer ${user.token}`
+        }
+      });
+    }), switchAll());
+  }
   setCurrentuser(user: User) {
     this.currentUserSource.next(user);
   }
