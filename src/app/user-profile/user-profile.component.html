@@ -1,0 +1,10 @@
+<div *ngIf="!userData else userDataAvailable">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<ng-template #userDataAvailable>
+    <div class="container mt-2">
+        <app-user-form [userData]="userData" (onUpdate)="update($event)"></app-user-form>
+    </div>
+</ng-template>
