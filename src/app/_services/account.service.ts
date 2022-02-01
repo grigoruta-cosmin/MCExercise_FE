@@ -16,6 +16,10 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
 
+  public get userValue() {
+    return this.currentUserSource.value;
+  }
+
   register(model: any) {
     return this.http.post(this.baseUrl + 'users/register', model).pipe(
       map((response: User) => {
@@ -31,11 +35,14 @@ export class AccountService {
   update(model: any) {
     return this.currentUser$.pipe(map((user: User) => {
       model['id'] = user.id;
-      return this.http.put(this.baseUrl + 'users/update', model, {
-        headers: {
-          Authorization: `Bearer ${user.token}`
-        }
-      });
+      return this.http.put(this.baseUrl + 'users/update', model);
+    }), switchAll());
+  }
+
+  delete() {
+    return this.currentUser$.pipe(map((user: User) => {
+      this.currentUserSource.next(null);
+      return this.http.delete(this.baseUrl + 'users/delete/' + user.id);
     }), switchAll());
   }
 
@@ -61,6 +68,7 @@ export class AccountService {
       });
     }), switchAll());
   }
+  
   setCurrentuser(user: User) {
     this.currentUserSource.next(user);
   }

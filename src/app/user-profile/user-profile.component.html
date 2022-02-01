@@ -5,6 +5,7 @@
 </div>
 <ng-template #userDataAvailable>
     <div class="container mt-2">
-        <app-user-form [userData]="userData" (onUpdate)="update($event)"></app-user-form>
+      <app-user-form [userData]="userData" (onUpdate)="update($event)"></app-user-form>
+      <button type="button" class="btn btn-danger mt-2" (click)="delete()">Delete Profile</button>
     </div>
 </ng-template>

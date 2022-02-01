@@ -23,6 +23,13 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
+  delete() {
+    this.accountService.delete().subscribe( result => {
+      console.log(result);
+      this.router.navigate(['/']);
+    })
+  }
+
   getUserProfile() {
     this.accountService.getCurrentUserData().subscribe((user: UserDTO) => {
       this.userData = user;

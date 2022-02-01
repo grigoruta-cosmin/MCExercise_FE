@@ -1,0 +1,30 @@
+<div class="container mt-2">
+    <div class="jumbotron">
+        <h1 class="display-4" style="color:white;">Welcome back!</h1>
+    </div>
+    <button routerLink="/profile">profile</button>
+    <form 
+        class="form mt-2 mt-md-0" 
+        (submit)="register()" 
+        autocomplete="off" 
+        *ngIf="(universityService.currentUniversity$ | async) === null">
+        <div *ngFor="let field of fields" class="form-group">
+            <label for="{{field.name}}">{{field.label}}</label>
+            <input 
+                id={{field.name}}
+                name="{{field.name}}" 
+                [(ngModel)]="model[field.name]" 
+                class="form-control mr-sm-2" 
+                type="{{field.type}}">
+        </div>
+        <div class="form-group">
+            <label for="occupation">Select Occupation</label>
+            <select name="type" class="form-control" id="occupation" [(ngModel)]="model.type">
+                <option [ngValue]="'High School Student'">High School Student</option>
+                <option [ngValue]="'Undergraduate Student'">Undergraduate Student</option>
+                <option [ngValue]="'Graduate Student'">Graduate Student</option>
+            </select>
+        </div>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" [disabled]="isFormDisabled()">Login</button>
+    </form>
+</div>
