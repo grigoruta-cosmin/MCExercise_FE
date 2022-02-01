@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserDTO } from '../_models/UserDTO';
-import { AccountService } from '../_services/account.service';
+import { UserDTO } from '../../_models/UserDTO';
+import { AccountService } from '../../_services/account.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -25,8 +25,8 @@ export class UserProfileComponent implements OnInit {
 
   delete() {
     this.accountService.delete().subscribe( result => {
-      console.log(result);
-      this.router.navigate(['/']);
+      console.log('Outer delete');
+      this.router.navigate(['user/register']);
     })
   }
 

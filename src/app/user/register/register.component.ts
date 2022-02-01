@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../_services/account.service';
+import { Router } from '@angular/router';
+import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
   selector: 'app-register',
@@ -38,8 +39,9 @@ export class RegisterComponent implements OnInit {
     label: 'Country'
   }]
   model: any = {};
-  constructor(public accountService: AccountService) { }
+  constructor(public accountService: AccountService, public router: Router) { }
   ngOnInit(): void {
+    
   }
 
   isFormDisabled() {
@@ -49,6 +51,7 @@ export class RegisterComponent implements OnInit {
   register() {
     console.log(this.model);
     this.accountService.register(this.model).subscribe(response => {
+      this.router.navigate(['user/home']);
       console.log(response);
     });
   }

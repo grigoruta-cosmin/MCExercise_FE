@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UserDTO } from '../_models/UserDTO';
+import { UserDTO } from 'src/app/_models/UserDTO';
 
 @Component({
   selector: 'app-user-form',
