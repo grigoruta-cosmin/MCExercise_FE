@@ -5,6 +5,9 @@
 </div>
 <ng-template #userDataAvailable>
     <div class="container mt-2">
+        <div *ngIf="userData.photoUrl">
+            <img class="img-thumbnail" src="{{userData.photoUrl}}">
+        </div>
       <app-user-form [userData]="userData" (onUpdate)="update($event)"></app-user-form>
       <button type="button" class="btn btn-danger mt-2" (click)="delete()">Delete Profile</button>
     </div>
