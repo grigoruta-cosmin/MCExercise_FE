@@ -1,19 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, Router } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { UniversityRegisterComponent } from './university-register/university-register.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { AlwaysAuthGuard } from './_guards/AlwaysAuthGuard'
+import { universityRoutes } from './university/university-routing.component';
+import { UniversityComponent } from './university/university.component';
+import { userRoutes } from './user/user-routing.module';
+import { UserComponent } from './user/user.component';
 
 
 const routes: Routes = [
-  {path: 'register', component: RegisterComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'profile', component: UserProfileComponent, canActivate: [AlwaysAuthGuard]},
-  {path: 'home', component: HomeComponent, canActivate: [AlwaysAuthGuard]},
-  {path: 'university', component: UniversityRegisterComponent},
+  {path: 'user', children: userRoutes, component: UserComponent},
+  {path: 'university', children: universityRoutes, component: UniversityComponent},
+  {path: '', redirectTo: 'user', pathMatch: 'full'}
 ];
 
 @NgModule({

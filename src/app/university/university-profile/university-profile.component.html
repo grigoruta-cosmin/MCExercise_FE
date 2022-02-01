@@ -1,0 +1,11 @@
+<div *ngIf="!universityData else universityDataAvailable">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<ng-template #universityDataAvailable>
+    <div class="container mt-2">
+      <app-university-form [universityData]="universityData" (onUpdate)="update($event)"></app-university-form>
+      <!-- <button type="button" class="btn btn-danger mt-2" (click)="delete()">Delete Profile</button> -->
+    </div>
+</ng-template>

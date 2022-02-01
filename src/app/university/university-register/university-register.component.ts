@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NavbarService } from '../_services/navbar.service';
-import { UniversityService } from '../_services/university.service';
+import { NavbarService } from '../../_services/navbar.service';
+import { UniversityService } from '../../_services/university.service';
 
 @Component({
   selector: 'app-university-register',
   templateUrl: './university-register.component.html',
   styleUrls: ['./university-register.component.css']
 })
-export class UniversityRegisterComponent implements OnInit, OnDestroy {
+export class UniversityRegisterComponent implements OnInit {
   fields : any [] = [{
     name: 'email',
     type: 'email',
@@ -19,7 +19,7 @@ export class UniversityRegisterComponent implements OnInit, OnDestroy {
     label: 'Password'
   },
   {
-    name: 'Name',
+    name: 'name',
     type: 'text',
     label: 'Name'
   },
@@ -37,12 +37,7 @@ export class UniversityRegisterComponent implements OnInit, OnDestroy {
 
   constructor(public navbarService: NavbarService, public universityService: UniversityService) { }
   
-  ngOnDestroy(): void {
-    this.navbarService.setVisibility(true);
-  }
-
   ngOnInit(): void {
-    this.navbarService.setVisibility(false);
   }
 
   isFormDisabled() {
