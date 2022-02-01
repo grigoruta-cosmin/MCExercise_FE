@@ -1,0 +1,6 @@
+<div class="card mb-2" *ngFor="let category of categories">
+    <div class="card-body">
+        <h5>{{category.categoryName}}</h5>
+        <a class="btn btn-danger" (click)="delete(category.id)">Delete</a>
+    </div>
+</div>

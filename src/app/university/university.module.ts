@@ -10,6 +10,9 @@ import { UniversityHomeComponent } from './university-home/university-home.compo
 import { UniversityNavComponent } from './university-nav/university-nav.component';
 import { UniversityProfileComponent } from './university-profile/university-profile.component';
 import { UniversityFormComponent } from './university-form/university-form.component';
+import { CategoryComponent } from './category/category.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
+import { ListCategoryComponent } from './list-category/list-category.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +22,10 @@ import { UniversityFormComponent } from './university-form/university-form.compo
         UniversityHomeComponent,
         UniversityNavComponent,
         UniversityProfileComponent,
-        UniversityFormComponent
+        UniversityFormComponent,
+        CategoryComponent,
+        AddCategoryComponent,
+        ListCategoryComponent
     ],
     exports: [
         UniversityComponent
