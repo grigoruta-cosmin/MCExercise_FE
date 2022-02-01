@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
-import { map, switchAll } from 'rxjs/operators'
+import { filter, map, share, switchAll } from 'rxjs/operators'
 import { User } from '../_models/User';
 import { UserDTO } from '../_models/UserDTO';
 
@@ -40,10 +40,13 @@ export class AccountService {
   }
 
   delete() {
-    return this.currentUser$.pipe(map((user: User) => {
-      this.currentUserSource.next(null);
+    let obs = this.currentUser$.pipe(filter((user) => user != null), map((user: User) => {
       return this.http.delete(this.baseUrl + 'users/delete/' + user.id);
-    }), switchAll());
+    }), switchAll(), share());
+    obs.subscribe(() => {
+      this.currentUserSource.next(null);
+    })
+    return obs;
   }
 
   login(model: any) {

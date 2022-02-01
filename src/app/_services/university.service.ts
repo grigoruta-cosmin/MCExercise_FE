@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchAll } from 'rxjs/operators';
 import { University } from '../_models/University';
 
 @Injectable({
@@ -9,9 +9,14 @@ import { University } from '../_models/University';
 })
 export class UniversityService {
   baseUrl = 'https://localhost:7076/api/universities'
-  constructor(private http: HttpClient) { }
   private currentUniversitySource = new BehaviorSubject<University>(JSON.parse(localStorage.getItem('university')));
   currentUniversity$ = this.currentUniversitySource.asObservable();
+  
+  constructor(private http: HttpClient) { }
+
+  public get universityValue() {
+    return this.currentUniversitySource.value;
+  }
 
   register(model: any) {
     return this.http.post(this.baseUrl + '/register', model).pipe(
@@ -36,6 +41,27 @@ export class UniversityService {
         return university;
       })
     );
+  }
+
+  getCurrentUniversityData() {
+    return this.currentUniversity$.pipe(map((university: University) => {
+      return this.http.get(this.baseUrl + `/${university.id}`, {
+        headers: {
+          Authorization: `Bearer ${university.token}`
+        }
+      })
+    }), switchAll());
+  }
+
+  update(model: any) {
+    return this.currentUniversity$.pipe(map((university: University) => {
+      model['id'] = university.id;
+      return this.http.put(this.baseUrl + '/update', model, {
+        headers: {
+          Authorization: `Bearer ${university.token}`
+        }
+      })
+    }), switchAll());
   }
 
   setCurrentUniversity(university: University) {
