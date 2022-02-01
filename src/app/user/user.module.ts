@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
+import { AddSymbolPipe } from "./add-plus.pipe";
 import { HomeComponent } from "./home/home.component";
 import { LoginComponent } from "./login/login.component";
 import { NavComponent } from "./nav/nav.component";
@@ -21,7 +22,8 @@ import { UserComponent } from "./user.component";
         RegisterComponent,
         NavComponent,
         UserProfileComponent,
-        UserFormComponent
+        UserFormComponent,
+        AddSymbolPipe
     ],
     exports: [
         UserComponent

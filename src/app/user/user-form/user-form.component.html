@@ -1,7 +1,7 @@
 <form (ngSubmit)="onUpdate.emit(userData)">
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="firstName">First Name</label>
+            <label for="firstName">{{'First Name' | addSymbol:'_'}}</label>
             <input name="firstName" type="text" class="form-control" id="firstName" [(ngModel)]="userData.firstName">
         </div>
         <div class="form-group col-md-6">
